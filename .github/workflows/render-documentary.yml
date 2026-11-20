@@ -1,0 +1,37 @@
+name: Render Saint Francis 10-minute video
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/render-documentary.yml"
+      - "documentary/**"
+      - "requirements*.txt"
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install FFmpeg, fonts and Python dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y ffmpeg fontconfig fonts-noto-core fonts-dejavu-core
+          python -m pip install -r requirements-documentary.txt
+      - name: Test the documentary renderer
+        run: python -m unittest discover -s documentary/tests
+      - name: Render and verify documentary MP4
+        run: python -m documentary.render --workers 2
+      - name: Upload verified documentary
+        uses: actions/upload-artifact@v4
+        with:
+          name: Saint-Francis-10-Minute-Video
+          path: Saint_Francis_10_Minute.mp4
+          if-no-files-found: error
