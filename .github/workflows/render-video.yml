@@ -1,0 +1,36 @@
+name: Render Saint Francis video
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/render-video.yml"
+      - "render_video.py"
+      - "illustrations.py"
+      - "requirements.txt"
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install FFmpeg, fonts and Python dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y ffmpeg fonts-noto-core fonts-dejavu-core
+          python -m pip install -r requirements.txt
+      - name: Render and verify MP4
+        run: python render_video.py
+      - name: Upload verified MP4
+        uses: actions/upload-artifact@v4
+        with:
+          name: Saint-Francis-Video
+          path: Saint_Francis_Test.mp4
+          if-no-files-found: error
