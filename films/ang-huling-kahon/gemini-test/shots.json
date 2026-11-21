@@ -1,0 +1,17 @@
+[
+  {
+    "id": "01-letter-slide",
+    "action": "A locked eye-level medium two-shot. Ben sits screen left and Lita screen right. Lita slides one unfolded handwritten letter across the table toward Ben. He takes the corner and looks down. Both remain silent. Hold through the action.",
+    "subtitle": null
+  },
+  {
+    "id": "02-ben-question",
+    "action": "A locked medium close-up of Ben, with his mouth visible. He looks down at the letter, then screen right toward Lita. In quiet natural Tagalog he says exactly: Bakit niya inakalang nasa loob ako? Hold on his reaction after the line. Only Ben speaks.",
+    "subtitle": "Why did she think I was inside?"
+  },
+  {
+    "id": "03-lita-reply",
+    "action": "A locked reverse medium close-up of Lita, with her mouth visible. She looks screen left toward Ben and says quietly in natural Tagalog: Tinanong niya ako kung nasaan ka. After the line her eyes fall to the letter. Only Lita speaks.",
+    "subtitle": "She asked me where you were."
+  }
+]
